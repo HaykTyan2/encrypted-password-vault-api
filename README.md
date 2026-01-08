@@ -15,18 +15,18 @@ and FastAPI.
 This backend provides a secure API for managing encrypted credential entries.
 
 It allows a client to:
-
+```
 • Authenticate using a master password
 • Hash passwords securely using Argon2
 • Encrypt stored credentials before saving them to the database
 • Store encrypted entries in a SQLite database
 • Retrieve and decrypt entries only after authentication
 • Use JWT access tokens to protect API routes
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## HOW IT WORKS (HIGH LEVEL)
-
+```
 • The application starts a FastAPI server
 • A master password is hashed and verified using Argon2
 • Upon successful authentication, a JWT access token is issued
@@ -34,7 +34,7 @@ It allows a client to:
 • Credential values are encrypted using symmetric encryption before storage
 • Encrypted data and salts are stored in SQLite
 • Data is decrypted only when explicitly requested
-
+```
 --------------------------------------------------------------------------------------------------------
 
 PROJECT STRUCTURE
@@ -79,12 +79,12 @@ main.py
 This is the main entry point of the application.
 
 It is responsible for:
-
+```
 • Creating the FastAPI application
 • Initializing the database on startup
 • Registering API routers
 • Launching the server
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## src/api/auth.py
@@ -92,11 +92,11 @@ It is responsible for:
 Handles authentication-related routes.
 
 This file:
-
+```
 • Verifies the master password
 • Issues JWT access tokens
 • Acts as the authentication gateway for the API
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## src/api/entries.py
@@ -104,11 +104,11 @@ This file:
 Handles credential entry routes.
 
 This file:
-
+```
 • Creates encrypted credential entries
 • Lists stored entries
 • Reveals (decrypts) a specific entry when authorized
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## src/core/security.py
@@ -116,11 +116,11 @@ This file:
 Handles authentication and password security.
 
 This file:
-
+```
 • Hashes passwords using Argon2
 • Verifies hashed passwords
 • Creates and signs JWT access tokens
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## src/core/crypto.py
@@ -128,11 +128,11 @@ This file:
 Handles encryption logic.
 
 This file:
-
+```
 • Derives encryption keys
 • Encrypts credential values before storage
 • Decrypts credential values on retrieval
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## src/database/models.py
@@ -140,11 +140,11 @@ This file:
 Defines database models.
 
 This file:
-
+```
 • Defines the credential entry schema
 • Stores encrypted values and salts
 • Uses SQLAlchemy ORM for database interaction
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## INSTALLATION / PROCESS
@@ -169,33 +169,33 @@ uvicorn main:app --reload
 --------------------------------------------------------------------------------------------------------
 
 ## OUTPUT
-
+```
 • A FastAPI server is started locally
 • SQLite database is created automatically if missing
 • Encrypted credential entries are stored securely
 • Decryption is only performed on authorized requests
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## CONFIGURATION AND SECURITY NOTES
-
+```
 • This project runs locally by default
 • SQLite database files are generated at runtime and should not be committed
 • The SECRET_KEY value in config.py is a placeholder
 • SECRET_KEY must be replaced via environment variable in production
 • JWT tokens are signed using the configured algorithm
 • This project is intended for educational and learning purposes
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## NOTES AND LIMITATIONS
-
+```
 • This is a backend-only service (no frontend included)
 • Authentication is simplified for learning purposes
 • Multi-user support is not implemented
 • SQLite is used for simplicity, not scalability
 • This project is not production-hardened
-
+```
 --------------------------------------------------------------------------------------------------------
 
 ## LICENSE
